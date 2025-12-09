@@ -1,5 +1,6 @@
 public class Salutation { 
-public static void main(String[] args) { 
-        System.out.println("Hello, user!"); 
+public static void main(String[] args) {
+    System.out.println("Bonjour de Tracy Bachmann !");
+    System.out.println("Hello, user!");
     } 
 } 
