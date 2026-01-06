@@ -204,7 +204,7 @@
             <mxPoint x="364" y="200" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="I_rgdi2L-q4vl07qd9qb-184" connectable="0" parent="I_rgdi2L-q4vl07qd9qb-183" style="resizable=0;html=1;whiteSpace=wrap;align=left;verticalAlign=bottom;" value="0..*" vertex="1">
+        <mxCell id="I_rgdi2L-q4vl07qd9qb-184" connectable="0" parent="I_rgdi2L-q4vl07qd9qb-183" style="resizable=0;html=1;whiteSpace=wrap;align=left;verticalAlign=bottom;" value="1" vertex="1">
           <mxGeometry relative="1" x="-1" as="geometry" />
         </mxCell>
         <mxCell id="I_rgdi2L-q4vl07qd9qb-185" connectable="0" parent="I_rgdi2L-q4vl07qd9qb-183" style="resizable=0;html=1;whiteSpace=wrap;align=right;verticalAlign=bottom;" value="0..*" vertex="1">
@@ -223,7 +223,7 @@
             <mxPoint x="450" y="240" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="I_rgdi2L-q4vl07qd9qb-188" connectable="0" parent="I_rgdi2L-q4vl07qd9qb-187" style="resizable=0;html=1;whiteSpace=wrap;align=left;verticalAlign=bottom;" value="0..*" vertex="1">
+        <mxCell id="I_rgdi2L-q4vl07qd9qb-188" connectable="0" parent="I_rgdi2L-q4vl07qd9qb-187" style="resizable=0;html=1;whiteSpace=wrap;align=left;verticalAlign=bottom;" value="1" vertex="1">
           <mxGeometry relative="1" x="-1" as="geometry">
             <mxPoint x="-21" as="offset" />
           </mxGeometry>
@@ -244,7 +244,7 @@
             <mxPoint x="300" y="200" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="I_rgdi2L-q4vl07qd9qb-192" connectable="0" parent="I_rgdi2L-q4vl07qd9qb-191" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0..*" vertex="1">
+        <mxCell id="I_rgdi2L-q4vl07qd9qb-192" connectable="0" parent="I_rgdi2L-q4vl07qd9qb-191" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1" vertex="1">
           <mxGeometry relative="1" x="-0.7951" y="2" as="geometry">
             <mxPoint x="1" as="offset" />
           </mxGeometry>
@@ -504,16 +504,13 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="I_rgdi2L-q4vl07qd9qb-301" parent="I_rgdi2L-q4vl07qd9qb-275" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&lt;b&gt;Contrat&lt;/b&gt;" vertex="1">
-          <mxGeometry height="104" width="140" x="480" y="302" as="geometry" />
+          <mxGeometry height="78" width="140" x="480" y="302" as="geometry" />
         </mxCell>
         <mxCell id="I_rgdi2L-q4vl07qd9qb-302" parent="I_rgdi2L-q4vl07qd9qb-301" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+date_debut: Date" vertex="1">
           <mxGeometry height="26" width="140" y="26" as="geometry" />
         </mxCell>
         <mxCell id="I_rgdi2L-q4vl07qd9qb-303" parent="I_rgdi2L-q4vl07qd9qb-301" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ dateFine: Date" vertex="1">
           <mxGeometry height="26" width="140" y="52" as="geometry" />
-        </mxCell>
-        <mxCell id="I_rgdi2L-q4vl07qd9qb-304" parent="I_rgdi2L-q4vl07qd9qb-301" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ field: type" vertex="1">
-          <mxGeometry height="26" width="140" y="78" as="geometry" />
         </mxCell>
         <mxCell id="I_rgdi2L-q4vl07qd9qb-305" edge="1" parent="I_rgdi2L-q4vl07qd9qb-275" source="I_rgdi2L-q4vl07qd9qb-282" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.194;entryY=0.01;entryDx=0;entryDy=0;entryPerimeter=0;" target="I_rgdi2L-q4vl07qd9qb-301" value="">
           <mxGeometry relative="1" width="160" as="geometry">
