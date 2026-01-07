@@ -1,0 +1,40 @@
+@startuml
+|Chef d'atelier|
+start
+:Saisir les critères de recherche de la voiture;
+
+|Logiciel|
+:Afficher la liste des voitures correspondantes;
+
+|Chef d'atelier|
+if (Voiture existe ?) then (oui)
+  :Sélectionner la voiture;
+
+  |Logiciel|
+  :Afficher les informations du véhicule;
+
+  |Chef d'atelier|
+  if (Voiture sous garantie ?) then (oui)
+    :Saisir la date de demande de réparation;
+  endif
+
+else (non)
+  :Saisir les informations du nouveau véhicule;
+endif
+
+:Saisir la date de réception;
+:Saisir la date de restitution;
+
+if (Dommage payé par assurance ?) then (oui)
+  |Logiciel|
+  :Afficher la liste des assurances;
+
+  |Chef d'atelier|
+  :Sélectionner l’assurance adéquate;
+endif
+
+|Logiciel|
+:Enregistrer la fiche de réparation;
+
+stop
+@enduml

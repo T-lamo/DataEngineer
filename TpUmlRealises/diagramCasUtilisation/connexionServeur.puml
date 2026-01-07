@@ -1,0 +1,84 @@
+@startuml
+left to right direction
+
+actor Client
+
+rectangle "CONNEXION A UN SERVEUR (HTTP, mail, telnet et FTP)" {
+
+  (S’authentifier)
+  (Identifier le client)
+
+  (Consulter des ressources HTTP)
+  (Envoyer des requêtes HTTP)
+
+  (Envoyer un mail)
+  (Recevoir un mail)
+
+  (Télécharger des fichiers)@startuml
+left to right direction
+
+actor Client
+
+rectangle "CONNEXION A UN SERVEUR (HTTP, mail, telnet et FTP)" {
+
+  (S’authentifier)
+  (Identifier le client)
+
+  (Consulter des ressources HTTP)
+  (Envoyer des requêtes HTTP)
+
+  (Envoyer un mail)
+  (Recevoir un mail)
+
+  (Télécharger des fichiers)
+  (Téléverser des fichiers)
+
+ 
+
+  Client -- (S’authentifier)
+  (S’authentifier) ..> (Identifier le client) : <<include>>
+
+  Client -- (Consulter des ressources HTTP)
+  Client -- (Envoyer des requêtes HTTP)
+
+  Client -- (Envoyer un mail)
+  Client -- (Recevoir un mail)
+
+  Client -- (Télécharger des fichiers)
+  Client -- (Téléverser des fichiers)
+
+  Client -- (Exécuter des commandes à distance)
+
+
+  (Consulter des ressources HTTP) ..> (Identifier le client) : <<include>>
+  (Envoyer un mail) ..> (S’authentifier) : <<include>>
+  (Téléverser des fichiers) ..> (S’authentifier) : <<include>>
+  (Exécuter des commandes à distance) ..> (S’authentifier) : <<include>>
+}
+@enduml
+
+  (Téléverser des fichiers)
+
+ 
+
+  Client -- (S’authentifier)
+  (S’authentifier) .> (Identifier le client) : <<include>>
+
+  Client -- (Consulter des ressources HTTP)
+  Client -- (Envoyer des requêtes HTTP)
+
+  Client -- (Envoyer un mail)
+  Client -- (Recevoir un mail)
+
+  Client -- (Télécharger des fichiers)
+  Client -- (Téléverser des fichiers)
+
+  Client -- (Exécuter des commandes à distance)
+
+
+  (Consulter des ressources HTTP) --> (Identifier le client) : <<include>>
+  (Envoyer un mail) --> (S’authentifier) : <<include>>
+  (Téléverser des fichiers) --> (S’authentifier) : <<include>>
+  (Exécuter des commandes à distance) --> (S’authentifier) : <<include>>
+}
+@enduml

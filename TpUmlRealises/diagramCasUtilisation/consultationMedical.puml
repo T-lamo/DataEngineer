@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+
+actor Patient
+actor Médecin
+actor "Secrétaire médicale" as Secretaire
+actor "Assurance maladie" as Assurance
+
+rectangle "Système de gestion de consultation médicale" {
+
+  Patient -- (Prendre rendez-vous)
+  Secretaire -- (Prendre rendez-vous)
+
+  Patient -- (Consulter le médecin)
+  Patient -- (Décrire les symptômes)
+
+  Médecin -- (Examiner le patient)
+  Médecin -- (Poser un diagnostic)
+
+  (Poser un diagnostic) ..> (Prescrire un traitement) : <<include>>
+  (Prescrire un traitement) ..> (Établir une ordonnance) : <<include>>
+
+  Médecin -- (Rédiger un certificat médical)
+
+  Patient -- (Payer la consultation)
+}
+
+(Payer la consultation) -- Assurance
+@enduml

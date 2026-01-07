@@ -1,0 +1,46 @@
+@startuml
+|Chef d'atelier|
+start
+:Saisir la fiche de réparation;
+:Saisir le travail effectué par les employés;
+
+
+|Mécaniciens|
+fork
+  :Récupérer les pièces au magasin;
+  repeat
+    if (Fiche ouverte ET pièce disponible ?) then (oui)
+      :Magasin fournit les pièces via terminal;
+      break
+    else (non)
+      :Attendre ouverture de la fiche ou disponibilité de la pièce;
+    endif
+  repeat while (true)
+fork again
+  |Autres employés|
+  :Récupérer les pièces au magasin;
+  repeat
+    if (Fiche ouverte ET pièce disponible ?) then (oui)
+      :Magasin fournit les pièces via terminal;
+      break
+    else (non)
+      :Attendre ouverture de la fiche ou disponibilité de la pièce;
+    endif
+  repeat while (true)
+end fork
+
+|Chef d'atelier|
+:Faire la réparation;
+:Tester la voiture;
+if (Tout en ordre ?) then (oui)
+  :Mettre la voiture sur parc clientèle;
+  :Fiche de réparation bouclée;
+else (non)
+  :Reprendre réparation si nécessaire;
+endif
+
+|Comptable|
+:Importer la fiche bouclée dans le logiciel comptable;
+
+stop
+@enduml
