@@ -1,0 +1,72 @@
+@startuml
+' Super-classe Utilisateur
+class Utilisateur {
+    - nom : String
+    - prenom : String
+    + seConnecter()
+}
+
+' Employé hérite de Utilisateur
+class Employe {
+    - anciennete : int
+    - souhaits : List<Session>
+    + demanderInscription(f: Formation)
+    + classerSessions()
+    + consulterAffectation()
+    + getPreferences() : List<Session>
+}
+Employe --|> Utilisateur
+
+' Organisateur hérite de Utilisateur
+class Organisateur {
+    + gererCatalogue(c: Catalogue)
+    + gererFormations(f: Formation)
+    + gererSessions(s: Session)
+    + cloturerInscriptions(f: Formation)
+    + affecterEmployes()
+    + consulterAffectations()
+}
+Organisateur --|> Utilisateur
+
+' Catalogue
+class Catalogue {
+    - annee : int
+    + ajouterFormation(f: Formation)
+    + getFormations() : List<Formation>
+}
+
+' Formation
+class Formation {
+    - titre : String
+    - duree : int
+    + creerSession(s: Session)
+    + getSessions() : List<Session>
+}
+
+' Session
+class Session {
+    - numero : int
+    - dateDebut : Date
+    - nbMaxParticipants : int
+    - participants : List<Employe>
+    + inscrireEmploye(e: Employe)
+    + getListeParticipants() : List<Employe>
+}
+
+' Associations
+Catalogue "1" *-- "1..*" Formation : contient >
+Formation "1" *-- "1..*" Session : propose >
+Session "0..*" -- "0..3" Employe : inscrits >
+
+' Notes UML pour règles de gestion
+note right of Employe
+  - max 3 formations/an
+  - anciennete unique pour la priorisation
+  - inscription selon ordre de préférence
+end note
+
+note left of Session
+  - nombre de places limité
+  - allocation selon anciennete + preferences
+end note
+@enduml

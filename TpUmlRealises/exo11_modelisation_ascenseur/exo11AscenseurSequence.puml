@@ -1,0 +1,99 @@
+@startuml
+actor Usager
+
+participant Ascenseur
+participant Porte
+participant Voyant
+
+activate Ascenseur
+
+' =====================
+' Appel de l’ascenseur
+' =====================
+Usager -> Ascenseur : appel(positionUsager)
+
+alt positionAscenseur != positionUsager
+
+    activate Porte
+    Ascenseur -> Porte : getEtat()
+    Porte --> Ascenseur : etat
+
+    alt etat == ouvert
+        Ascenseur -> Porte : fermer()
+        Porte --> Ascenseur : etat = fermé
+    end
+    deactivate Porte
+
+    alt positionUsager > positionAscenseur
+        Ascenseur -> Ascenseur : monter()
+    else positionUsager < positionAscenseur
+        Ascenseur -> Ascenseur : descendre()
+    end
+
+    Ascenseur -> Ascenseur : deplacer()
+    Ascenseur --> Ascenseur : position = positionUsager
+end
+
+' =====================
+' Arrivée à l’usager
+' =====================
+activate Porte
+Ascenseur -> Porte : getEtat()
+Porte --> Ascenseur : etat
+
+alt etat == fermé
+    Ascenseur -> Porte : ouvrir()
+    Porte --> Ascenseur : etat = ouvert
+end
+deactivate Porte
+
+Ascenseur --> Usager : porte ouverte
+
+' =====================
+' Choix de l’étage
+' =====================
+Usager -> Ascenseur : choisirEtage(destination)
+
+' Voyant s’allume ici
+activate Voyant
+Ascenseur -> Voyant : allumer()
+Voyant --> Ascenseur : etat = allumé
+
+' =====================
+' Départ vers destination
+' =====================
+activate Porte
+Ascenseur -> Porte : getEtat()
+Porte --> Ascenseur : etat
+
+alt etat == ouvert
+    Ascenseur -> Porte : fermer()
+    Porte --> Ascenseur : etat = fermé
+end
+deactivate Porte
+
+Ascenseur -> Ascenseur : monter()
+Ascenseur -> Ascenseur : deplacer()
+Ascenseur --> Ascenseur : position = destination
+
+' =====================
+' Arrivée à destination
+' =====================
+activate Porte
+
+
+Ascenseur -> Porte : ouvrir()
+Porte --> Ascenseur : etat = ouvert
+Ascenseur -> Porte : fermer()
+Porte --> Ascenseur : etat = fermé
+
+deactivate Porte
+
+
+
+' Voyant s’éteint à la sortie
+Ascenseur -> Voyant : eteindre()
+deactivate Voyant
+
+deactivate Ascenseur
+@enduml

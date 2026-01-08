@@ -1,0 +1,19 @@
+@startuml
+
+
+object Utilisateur
+object Ordinateur
+object "Serveur Imprimante" as SI
+object "QueueImpression" as QI
+object Imprimante
+
+' Messages numérotés, présentés verticalement
+Utilisateur -> Ordinateur : 1: print()
+Ordinateur -> SI : 2: print()
+SI -> QI : 3: store()
+SI -> Imprimante : 4: Print()
+Imprimante -> Imprimante : 5: Etat()
+Imprimante -> SI : 6: OK
+SI -> Ordinateur : 7: confirmation
+Ordinateur -> Utilisateur : 8: impression lancée
+@enduml

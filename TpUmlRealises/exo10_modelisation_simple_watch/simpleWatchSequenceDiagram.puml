@@ -1,0 +1,84 @@
+@startuml
+actor Utilisateur as UT
+participant "t: Simple Watch" as SW 
+participant "t: Button 1" as B1
+participant "t: Button 2" as B2
+participant "t: LCD Display" as LD
+participant "t: Time" as T
+
+activate SW
+activate T
+
+SW -> T : now()
+
+' Appuis sur B1
+activate UT
+activate B1
+UT -> B1 : push()
+UT -> B1 : push()
+B1 --> SW: Accède au réglage des minutes 
+deactivate B1
+
+
+' LCD blinking
+activate LD
+SW -> LD : blinkHours()
+SW -> LD : blinkMinutes()
+
+' Boucle pour B2
+loop appuyer sur B2
+    activate B2
+    UT -> B2 : push()
+    deactivate B2
+
+
+    SW -> T : incrementeMinutes()
+    
+    ' Condition : si minutes = 60, incrémente les heures et remet minutes à 0
+    alt minutes == 60
+        SW -> T : incrementeHours()
+        T --> SW : reset minute to 0
+    end
+    
+    activate LD
+    SW -> LD : refresh()
+    deactivate LD
+end
+
+' Note pour montrer que B1 et B2 sont prêts à être pressés simultanément
+note right of B1
+  B1 prêt
+end note
+note right of B2
+  B2 prêt
+end note
+
+activate UT
+' Appuis simultanés sur B1 et B2
+par Appui simultané B1 et B2
+
+    activate B1
+    UT -> B1 : push()
+    deactivate B1
+
+    activate B2
+    UT -> B2 : push()
+    deactivate B2
+
+end
+deactivate UT
+
+SW -> T : commitNewTime()
+T --> SW : Enregistrement OK
+
+activate LD
+SW -> LD : StopBlinking()
+LD--> SW : Stop blinking OK
+
+deactivate LD
+
+deactivate T
+deactivate SW
+deactivate LD
+
+@enduml

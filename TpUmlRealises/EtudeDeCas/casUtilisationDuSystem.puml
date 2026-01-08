@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+
+actor Utilisateur
+actor Employe
+actor "Organisateur de formations" as Organisateur
+
+' Héritage entre acteurs
+Employe --|> Utilisateur
+Organisateur --|> Utilisateur
+
+rectangle "Système de gestion des formations" {
+
+    Utilisateur -- (Consulter le catalogue de formations)
+
+    Employe -- (Demander inscription à une formation)
+    Employe -- (Classer les sessions par préférence)
+    Employe -- (Consulter son affectation)
+
+    Organisateur -- (Gérer le catalogue de formations)
+    Organisateur -- (Gérer les formations)
+    Organisateur -- (Gérer les sessions)
+    Organisateur -- (Clôturer les inscriptions)
+    Organisateur -- (Affecter les employés aux sessions)
+    Organisateur -- (Consulter les affectations)
+
+    (Demander inscription à une formation) ..> (Classer les sessions par préférence) : <<include>>
+}
+@enduml

@@ -1,0 +1,63 @@
+@startuml
+actor "Organisateur de formations" as OF
+
+participant "t: SystèmeGestionFormations" as SGF
+participant "t: Catalogue" as C
+participant "t: Formation" as F
+participant "t: Session" as S
+
+' ===============================
+' Héritage (pour information visuelle)
+' ===============================
+note left of OF
+  Organisateur hérite de Utilisateur
+end note
+
+' ===============================
+' Gestion du catalogue
+' ===============================
+OF -> SGF : gererCatalogue(c: Catalogue)
+activate SGF
+
+alt Catalogue existe ?
+    SGF -> C : getFormations()
+    activate C
+    C --> SGF : liste des formations
+    deactivate C
+else
+    SGF -> C : ajouterFormation(f: Formation)
+    activate C
+    C --> SGF : catalogue créé
+    deactivate C
+end
+
+SGF --> OF : catalogue prêt
+' ===============================
+' Création de la formation
+' ===============================
+OF -> SGF : gererFormations(f: Formation)
+SGF -> F : creerFormation(f: Formation)
+activate F
+F --> SGF : formation créée
+deactivate F
+SGF --> OF : formation ajoutée
+
+' ===============================
+' Création des sessions
+' ===============================
+loop Pour chaque session
+    OF -> SGF : gererSessions(s: Session)
+    SGF -> S : creerSession(s: Session)
+    activate S
+    S --> SGF : session créée
+    deactivate S
+    SGF --> OF : session ajoutée
+end
+
+' ===============================
+' Confirmation finale
+' ===============================
+SGF --> OF : confirmation catalogue, formation et sessions
+
+deactivate SGF
+@enduml

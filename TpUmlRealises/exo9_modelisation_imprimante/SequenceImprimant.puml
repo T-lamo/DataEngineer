@@ -1,0 +1,40 @@
+@startuml
+actor Utilisateur
+participant Ordinateur
+participant "Serveur Imprimante" as SI
+participant "QueueImpression" as QI
+participant Imprimante
+
+' L'utilisateur demande l'impression d'un fichier
+Utilisateur -> Ordinateur : print(fichier)
+activate Ordinateur
+
+' L'ordinateur envoie la demande au serveur d'impression
+Ordinateur -> SI : print(fichier)
+activate SI
+
+' Vérification et stockage dans la queue
+SI -> QI : store(fichier)
+activate QI
+
+alt Queue vide ?
+    QI --> SI : Queue vide, fichier ajouté
+else Queue non vide
+    QI --> SI : Fichier ajouté en attente
+end
+deactivate QI
+
+' Impression si possible
+SI -> Imprimante : Print(fichier)
+activate Imprimante
+Imprimante -> Imprimante : Etat()
+Imprimante --> SI : OK
+deactivate Imprimante
+
+' Confirmation vers l'ordinateur
+SI --> Ordinateur : impression terminée
+deactivate SI
+
+Ordinateur --> Utilisateur : confirmation : impression lancée
+deactivate Ordinateur
+@enduml
