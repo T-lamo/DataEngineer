@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session
 from src.conf.db.database import Database
 from src.services.user_service import UserService
-from src.models.user import User, UserBase, UserPatch, UserCreate
+from src.models.user import User, UserBase, UserPatch, UserCreate,UserRead
 
 # Création du routeur FastAPI
 router = APIRouter(
@@ -17,14 +17,14 @@ def get_user_service(session: Session = Depends(Database.get_session)) -> UserSe
 # -------------------------------
 # GET /users - Liste tous les utilisateurs
 # -------------------------------
-@router.get("/", response_model=list[UserBase])
+@router.get("/", response_model=list[User])
 def list_users(service: UserService = Depends(get_user_service)):
     return service.list_users()
 
 # -------------------------------
 # GET /users/{id} - Récupérer un utilisateur par ID
 # -------------------------------
-@router.get("/{user_id}", response_model=UserBase)
+@router.get("/{user_id}", response_model=UserRead)
 def get_user(user_id: int, service: UserService = Depends(get_user_service)):
     user = service.get_user_by_id(user_id)
     if not user:

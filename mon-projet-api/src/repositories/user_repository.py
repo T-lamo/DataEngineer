@@ -1,19 +1,22 @@
 from src.conf.db.database import Database
 from src.models.user import User, UserCreate
 from sqlmodel import Session, select
+from sqlalchemy.orm import selectinload
+
 
 class UserRepository:
     @staticmethod
     def get_all_users() -> list[User]:
         """Récupérer tous les utilisateurs"""
         with Session(Database.get_engine()) as session:
-            statement = select(User)
+            statement = select(User).options(selectinload(User.tickets))
             return session.exec(statement).all()
 
     @staticmethod
     def get_user_by_id(user_id: int) -> User | None:
         """Récupérer un utilisateur par son ID"""
         with Session(Database.get_engine()) as session:
+            print("user id in repo",user_id, type(user_id))
             return session.get(User, user_id)
 
     @staticmethod

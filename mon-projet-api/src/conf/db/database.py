@@ -1,5 +1,5 @@
 from sqlmodel import SQLModel, create_engine, Session
-from .settings import settings
+from src.conf.db.settings import settings
 
 class Database:
     _engine = None
@@ -24,6 +24,9 @@ class Database:
     @classmethod
     def init_db(cls):
         import src.models.user  # Import models to register them
+        import src.models.ticket
+        import src.models.tag
+        import src.models.associations.ticket_tag_link
         engine = cls.get_engine()
         SQLModel.metadata.create_all(engine)
 

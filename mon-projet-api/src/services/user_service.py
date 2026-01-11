@@ -1,5 +1,7 @@
 from sqlmodel import Session
-from src.models.user import User, UserCreate, UserPatch, UserBase
+from src.models.user import User, UserCreate, UserPatch, UserBase, UserRead
+from fastapi import HTTPException, status
+
 
 from src.repositories.user_repository import UserRepository
 from src.utils.security import hash_password , verify_password # Hypothetical utility for password hashing
@@ -10,17 +12,24 @@ class UserService:
         self.repo = UserRepository()
         self.session = session
 
-    def list_users(self) -> list[UserBase]:
+    def list_users(self) -> list[User]:
         """Récupérer tous les utilisateurs"""
         with self.session as session:
             return self.repo.get_all_users()
 
-    def get_user_by_id(self, user_id: int) -> UserBase | None:
+    def get_user_by_id(self, user_id: int) -> UserRead:
         """Récupérer un utilisateur par ID"""
         with self.session as session:
-            return self.repo.get_user_by_id(user_id)
+            user = self.repo.get_user_by_id(user_id)
+            if not user:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="Utilisateur non trouvé"
+                )
+            return user
 
-    def get_user_by_email(self, email: str) -> UserBase | None:
+
+    def get_user_by_email(self, email: str) -> UserRead | None:
         """Récupérer un utilisateur par email"""
         with self.session as session:
             return self.repo.get_user_by_email(email)
@@ -31,7 +40,10 @@ class UserService:
             # Vérifier si l'utilisateur existe déjà par email
             existing = self.repo.get_user_by_email(user_data.email)
             if existing:
-                raise ValueError("User with this email already exists")
+                raise HTTPException(
+                    status_code=status.HTTP_409_CONFLICT,
+                    detail="User with this email already exists"
+                )
             hash_password(user_data.password)  
             user = User(
                 email=user_data.email,

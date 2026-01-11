@@ -1,5 +1,5 @@
-from sqlmodel import Field, SQLModel
-
+from typing import List
+from sqlmodel import SQLModel, Field, Relationship
 
 class UserBase(SQLModel):
     email: str 
@@ -9,7 +9,9 @@ class UserBase(SQLModel):
     age: int | None = None
 
 class UserRead(UserBase):
-    pass
+    id: int
+    
+    
 
 class UserCreate(UserBase):
     password: str
@@ -23,3 +25,5 @@ class UserPatch(UserBase):
 class User(UserBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     password: str
+    tickets: List["Ticket"] = Relationship(back_populates="user")
+
